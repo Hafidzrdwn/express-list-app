@@ -1,0 +1,34 @@
+{
+  "name": "list-app",
+  "version": "1.0.0",
+  "description": "Simple list app with express.js",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js"
+  },
+  "keywords": [],
+  "author": "Hafidz Ridwan",
+  "license": "ISC",
+  "dependencies": {
+    "@develoka/angka-rupiah-js": "^1.0.3",
+    "@popperjs/core": "^2.11.5",
+    "bcrypt": "^5.0.1",
+    "body-parser": "^1.20.0",
+    "bootstrap": "^5.1.3",
+    "cookie-parser": "^1.4.6",
+    "dotenv": "^16.0.0",
+    "ejs": "^3.1.6",
+    "express": "^4.17.1",
+    "express-flash": "0.0.2",
+    "express-session": "^1.17.2",
+    "express-validator": "^6.14.0",
+    "jquery": "^3.6.0",
+    "mysql": "^2.18.1"
+  },
+  "devDependencies": {
+    "http-errors": "^2.0.0",
+    "morgan": "^1.10.0",
+    "nodemon": "^2.0.15"
+  }
+}

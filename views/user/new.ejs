@@ -1,0 +1,62 @@
+<%- include('../templates/header') -%>
+
+<h2 class="mt-4 mb-5">Form Penambahan Item</h2>
+
+<div class="row align-items-start justify-content-evenly">
+  <div class="col-lg-5 col-md-6 col-12">
+    <img class="w-100 rounded img-new-item" src="/images/grocery.jpg" alt="">
+  </div>
+  <div class="col-lg-6 col-md-6 col-12 p-4 bg-light border rounded">
+    <form action="/list" method="POST" autocomplete="off">
+      <div class="mb-3">
+        <label for="name" class="form-label">Nama item</label>
+        <input type="text" name="name" class="form-control <%if(messages.nameError) { %> border-danger <% } %>"
+          id="name" placeholder="Masukkan nama item.." autofocus>
+        <%if(messages.nameError) { %>
+        <p class="mt-1 text-danger">
+          <%= messages.nameError %>
+        </p>
+        <% } %>
+      </div>
+      <div class="mb-3">
+        <label for="tags" class="form-label">Tags (min : 1 maks : 3)</label>
+        <select name="tags" class="selectpicker" data-max-options="3"
+          data-style="border bg-white <%= messages.tagsInit %>" data-width="100%" data-live-search="true"
+          title="Pilih tags item.." multiple>
+          <% tags.forEach(tag => { %>
+          <option value="<%= tag %>"><%= tag %></option>
+          <% }) %>
+        </select>
+        <%if(messages.tagsError) { %>
+        <p class="mt-1 text-danger">
+          <%= messages.tagsError %>
+        </p>
+        <% } %>
+      </div>
+      <div class="mb-3">
+        <label for="price" class="form-label">Harga 1 item (Rp)</label>
+        <input id="price" name="price" class="form-control <%if(messages.priceError) { %> border-danger <% } %>"
+          type="number" min="0" placeholder="masukkan harga item..">
+        <%if(messages.priceError) { %>
+        <p class="mt-1 text-danger">
+          <%= messages.priceError %>
+        </p>
+        <% } %>
+      </div>
+      <div class="mb-4">
+        <label for="count" class="form-label">Jumlah item</label>
+        <input id="count" name="counts" class="form-control" type="number" min="1"
+          placeholder="masukkan jumlah belanjaan" value="1">
+      </div>
+      <div class="row align-items-center justify-content-between">
+        <div class="col-lg-5 col-md-5 col-5">
+          <a href="/list" class="text-primary">Kembali</a>
+        </div>
+        <div class="col-lg-5 col-md-5 col-5 text-end">
+          <button type="submit" class="btn my-btn-primary">Tambahkan</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+<%- include('../templates/footer') -%>

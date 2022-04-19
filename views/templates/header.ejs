@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>LISTQ App - <%= page_name %></title>
+  <link rel="shortcut icon" href="#" type="image/x-icon">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/bootstrap.min.css" />
+  <link rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.14.0-beta2/dist/css/bootstrap-select.min.css">
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+      <a class="navbar-brand fw-bold my-color" href="/">LISTQ <i class="fas fa-shopping-basket"></i></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
+        aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarText">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link 
+            <% if(page_name.toLowerCase() === 'home'){ %> 
+             <%= 'active' %> 
+            <% } %>" aria-current="page" href="/">
+              Home
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link 
+            <% if(page_name.toLowerCase() === 'list'){ %> 
+              <%= 'active' %> 
+            <% } %>" href="/list">
+              Keranjang
+            </a>
+          </li>
+        </ul>
+        <span class="navbar-text">
+          <!-- <span class="text-light">Hai, hafidzrdwn</span> -->
+          <% if(loggedin) { %>
+          <a href="/logout" class="btn my-btn-danger btn-logout">Logout <i class="fas fa-sign-out-alt"></i></a>
+          <% } else { %>
+          <a href="/auth" class="btn my-btn btn-login">Login <i class="fas fa-sign-in-alt"></i></a>
+          <% } %>
+        </span>
+      </div>
+    </div>
+  </nav>
+  <div class="container pt-3 px-4 pb-5">

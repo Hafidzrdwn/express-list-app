@@ -1,0 +1,78 @@
+<%- include('../templates/header') -%>
+
+<div class="row my-4 align-items-center justify-content-between">
+  <div class="col-lg-4 col-md-5 col-sm-6 col-6">
+    <h1>Daftar Belanjaan</h1>
+  </div>
+  <div class="col-lg-4 col-md-5 col-sm-6 col-6 text-end">
+    <a href="/new" class="btn my-btn">+ Tambahkan item</a>
+  </div>
+</div>
+
+<%if(messages.info) { %>
+<div class="row">
+  <div class="col-lg-6 col-md-8 col-sm-10 col-12">
+    <div class="alert my-alert-success d-flex align-items-center alert-dismissible fade show" role="alert">
+      <i class="fas fa-<%= messages.icon %> fs-4 me-3"></i>
+      <div>
+        <%= messages.info %>
+      </div>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+  </div>
+</div>
+<% } %>
+
+<% if(items.length > 0 ) { %>
+<div class="table-responsive">
+  <table class="table table-hover">
+    <thead class="bg-dark text-light">
+      <tr>
+        <th scope="col">Nomor</th>
+        <th scope="col">Nama Item</th>
+        <th scope="col">Tags</th>
+        <th scope="col">Harga</th>
+        <th scope="col">Jumlah Item</th>
+        <th scope="col">Total Harga</th>
+        <th scope="col">Tanggal</th>
+        <th scope="col">Aksi</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% items.forEach((item, i) => { %>
+      <tr>
+        <td><%= i + 1 %></td>
+        <td class="item-name"><%= item.name %></td>
+        <td class="item-category">
+          <% item.tags.forEach(tag => { %>
+          <span class="badge my-badge-success"><%= tag %></span>
+          <% }) %>
+        </td>
+        <td><%= `${item.price.num} (${item.price.display})` %></td>
+        <td><%= item.counts %></td>
+        <td><%= `${item.total_price.num} (${item.total_price.display})` %></td>
+        <td><%= item.date %></td>
+        <td class="item-menu">
+          <a class="btn btn-edit" href="/list/<%= item.id %>">Edit</a>
+          <a class="btn btn-hapus deleteBtn" href="/list/delete/<%= item.id %>"
+            onclick="return confirm('Apakah kamu yakin untuk menghapus item ini?')" data-count="<%= item.counts %>">
+            Hapus
+          </a>
+        </td>
+      </tr>
+      <% }); %>
+    </tbody>
+  </table>
+</div>
+<% } else { %>
+<div class="row p-5 text-center align-items-center justify-content-center">
+  <div class="col-lg-4 col-md-6 col-12 mb-4">
+    <img class="w-100" src="/images/empty.svg" alt="keranjang kosong">
+  </div>
+  <div class="col-lg-5 col-md-6 col-12">
+    <h3 class="mb-3">Ups Keranjang Anda Kosong...</h3>
+    <p>Silahkan <a href="/new">tambah belanjaan</a> anda terlebih dahulu, agar keranjang anda terisi.</p>
+  </div>
+</div>
+<% } %>
+<%- include('../templates/footer') -%>

@@ -1,0 +1,53 @@
+<%- include('header') -%>
+<div class="row my-5 justify-content-center align-items-center">
+  <div class="auth-container col-lg-5 p-4 rounded bg-white shadow border">
+    <a href="/" class="home-icon">
+      <i class="fas fa-home fs-4"></i>
+    </a>
+    <div class="text-center">
+      <img src="/images/groceries-icon.png" width="120" class="rounded-circle my-border p-2 mt-2 mb-4"
+        alt="icon keranjang">
+    </div>
+    <h4 class="my-color fw-bold mb-5 text-center">CREATE ACCOUNT</h4>
+    <form action="/auth/registration" method="POST" autocomplete="off">
+      <div class="mb-3">
+        <label for="username" class="form-label">Username</label>
+        <input type="text" name="username" class="form-control <%if(messages.errUsername) { %> border-danger <% } %>"
+          id="username" placeholder="Masukkan username anda.." autofocus>
+        <%if(messages.errUsername) { %>
+        <p class="mt-1 text-danger">
+          <%= messages.errUsername %>
+        </p>
+        <% } %>
+      </div>
+      <div class="mb-3">
+        <label for="email" class="form-label">Email</label>
+        <input type="email" name="email" class="form-control <%if(messages.errEmail) { %> border-danger <% } %>"
+          id="email" placeholder="Masukkan email anda..">
+        <%if(messages.errEmail) { %>
+        <p class="mt-1 text-danger">
+          <%= messages.errEmail %>
+        </p>
+        <% } %>
+      </div>
+      <div class="mb-4">
+        <label for="password" class="form-label">Password</label>
+        <input type="password" name="password"
+          class="form-control <%if(messages.errPassword) { %> border-danger <% } %>" id="password"
+          placeholder="Masukkan password..">
+        <%if(messages.errPassword) { %>
+        <p class="mt-1 text-danger">
+          <%= messages.errPassword %>
+        </p>
+        <% } %>
+      </div>
+      <div class="mb-2">
+        <button type="submit" class="btn w-100 my-btn">Register</button>
+      </div>
+      <div class="text-center mt-3">
+        <span class="text-secondary">Sudah mempunyai akun ? silahkan <a href="/auth">Login!</a></span>
+      </div>
+    </form>
+  </div>
+</div>
+<%- include('footer') -%>

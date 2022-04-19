@@ -1,0 +1,52 @@
+<%- include('header') -%>
+<div class="row my-5 justify-content-center align-items-center">
+  <div class="auth-container col-lg-5 p-4 rounded bg-white shadow border">
+    <a href="/" class="home-icon">
+      <i class="fas fa-home fs-4"></i>
+    </a>
+    <div class="text-center">
+      <img src="/images/groceries-icon.png" width="120" class="rounded-circle my-border p-2 mt-2 mb-3"
+        alt="icon keranjang">
+    </div>
+    <h4 class="my-color fw-bold mb-4 text-center">LOG IN</h4>
+    <%if(messages.error) { %>
+    <div class="alert my-alert-danger d-flex align-items-center alert-dismissible fade show" role="alert">
+      <i class="fas fa-times-circle fs-4 me-3"></i>
+      <div>
+        <%= messages.error %>
+      </div>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    <% } %>
+    <form action="/auth" method="POST" autocomplete="off">
+      <div class="mb-3">
+        <label for="email" class="form-label">Email</label>
+        <input type="email" name="email" class="form-control <%if(messages.errEmail) { %> border-danger <% } %>"
+          id="email" placeholder="Masukkan email anda.." autofocus>
+        <%if(messages.errEmail) { %>
+        <p class="mt-1 text-danger">
+          <%= messages.errEmail %>
+        </p>
+        <% } %>
+      </div>
+      <div class="mb-4">
+        <label for="password" class="form-label">Password</label>
+        <input type="password" name="password"
+          class="form-control <%if(messages.errPassword) { %> border-danger <% } %>" id="password"
+          placeholder="Masukkan password..">
+        <%if(messages.errPassword) { %>
+        <p class="mt-1 text-danger">
+          <%= messages.errPassword %>
+        </p>
+        <% } %>
+      </div>
+      <div class="mb-2">
+        <button type="submit" class="btn w-100 my-btn">Login</button>
+      </div>
+      <div class="text-center mt-3">
+        <span class="text-secondary">Belum mempunyai akun ? silahkan <a href="/auth/registration">Registrasi!</a></span>
+      </div>
+    </form>
+  </div>
+</div>
+<%- include('footer') -%>

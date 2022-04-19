@@ -1,0 +1,23 @@
+<%- include('../templates/header') -%>
+
+<div class="row mt-5 align-items-center justify-content-evenly">
+  <div class="col-lg-5 col-md-7 col-12">
+    <h1 class="my-color fw-bold">
+      <% if(loggedin) { %>
+      Hai, <%= username %>
+      <% } else { %>
+      LISTQ
+      <% } %>
+    </h1>
+    <h4 class="text-dark">Aplikasi daftar belanja</h4>
+    <p class="text-secondary">
+      LISTQ dapat membuat dan mengatur daftar pembelanjaan anda dengan mudah.
+      Tambahkan barang yang anda inginkan kapanpun, dimanapun.
+    </p>
+    <a href="/list" class="btn my-outline-btn">Lihat daftar</a>
+  </div>
+  <div class="col-lg-5 col-md-5 col-12">
+    <img class="w-100" src="/images/top.svg">
+  </div>
+</div>
+<%- include('../templates/footer') -%>
