@@ -5,16 +5,16 @@ const { validationResult } = require('express-validator')
 const { checkUsername, checkEmail, checkPassword, checkLoginEmail } = require('../lib/validator')
 const { validationErrorsHandler } = require('../lib/fix')
 const bcrypt = require('bcrypt')
-const authChecker = require('../middlewares/checkLogin')
+const { checkIsLogin } = require('../middlewares/checkAuth')
 
 router.route('/')
-  .get(authChecker, (req, res) => {
+  .get(checkIsLogin, (req, res) => {
       res.render('auth/login', {
       page_name: 'Login'
     })
   })
   .post([
-    authChecker,
+    checkIsLogin,
     checkLoginEmail,
     checkPassword
    ], (req, res) => {
@@ -66,13 +66,13 @@ router.route('/')
   })
 
 router.route('/registration')
-  .get(authChecker, (req, res) => {
+  .get(checkIsLogin, (req, res) => {
     res.render('auth/register', {
       page_name: 'Register'
     })
   })
   .post([
-    authChecker,
+    checkIsLogin,
     checkUsername,
     checkEmail,
     checkPassword

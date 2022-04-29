@@ -18,7 +18,7 @@
       <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
     <% } %>
-    <form action="/auth" method="POST" autocomplete="off">
+    <form action="/auth" method="POST">
       <div class="mb-3">
         <label for="email" class="form-label">Email</label>
         <input type="email" name="email" class="form-control <%if(messages.errEmail) { %> border-danger <% } %>"
@@ -33,7 +33,7 @@
         <label for="password" class="form-label">Password</label>
         <input type="password" name="password"
           class="form-control <%if(messages.errPassword) { %> border-danger <% } %>" id="password"
-          placeholder="Masukkan password..">
+          placeholder="Masukkan password.." autocomplete="off">
         <%if(messages.errPassword) { %>
         <p class="mt-1 text-danger">
           <%= messages.errPassword %>

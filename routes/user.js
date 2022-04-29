@@ -4,7 +4,7 @@ const db = require('../lib/db')
 const { validationResult } = require('express-validator')
 const { itemNameCheck, itemTagsCheck, itemPriceCheck } = require('../lib/validator')
 const { fixResult, validationErrorsHandler } = require('../lib/fix')
-const checkAuth = require('../middlewares/checkAuth')
+const { checkIsNotLogin } = require('../middlewares/checkAuth')
 
 const tags = [
     'makanan berat',
@@ -25,7 +25,7 @@ const tags = [
 ]
 
 router.route('/list')
-  .get(checkAuth, (req, res) => {
+  .get(checkIsNotLogin, (req, res) => {
     // mengakses data dari database 
     db.query(
       'SELECT * FROM items WHERE user_id = ? ORDER BY id DESC', [req.session.userId],
@@ -44,7 +44,7 @@ router.route('/list')
       )
   })
   .post([
-    checkAuth,
+    checkIsNotLogin,
     itemNameCheck,
     itemTagsCheck,
     itemPriceCheck
@@ -93,7 +93,7 @@ router.route('/list')
     })
   })
 
-router.get('/new', checkAuth , (req, res) => {
+router.get('/new', checkIsNotLogin , (req, res) => {
   res.render('user/new', {
     page_name: 'Add Item',
     tags: tags,
@@ -102,7 +102,7 @@ router.get('/new', checkAuth , (req, res) => {
 })
 
 router.route('/list/:id')
-  .get(checkAuth, (req, res) => {
+  .get(checkIsNotLogin, (req, res) => {
     db.query(
       'SELECT * FROM items WHERE id=?',
       [req.params.id],
@@ -122,7 +122,7 @@ router.route('/list/:id')
     )
   })
   .post([
-    checkAuth,
+    checkIsNotLogin,
     itemNameCheck,
     itemTagsCheck,
     itemPriceCheck
@@ -163,7 +163,7 @@ router.route('/list/:id')
     }
   })
 
-router.get('/list/delete/:id', checkAuth, (req, res) => {
+router.get('/list/delete/:id', checkIsNotLogin, (req, res) => {
   db.query(
     'DELETE FROM items WHERE id=?',
     [req.params.id],
@@ -177,7 +177,7 @@ router.get('/list/delete/:id', checkAuth, (req, res) => {
   )
 })
  
-router.get('/logout', checkAuth, (req, res) => {
+router.get('/logout', checkIsNotLogin, (req, res) => {
   delete req.session.loggedin
   delete req.session.username
   delete req.session.userId
